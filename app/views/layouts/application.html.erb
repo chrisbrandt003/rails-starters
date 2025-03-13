@@ -21,8 +21,32 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
+  <body class="bg-gray-50">
+    <header class="bg-blue-600 text-white py-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-2xl font-semibold">Your Logo</h1>
+        <nav>
+          <ul class="flex space-x-6">
+            <li><a href="#" class="hover:text-gray-200">Home</a></li>
+            <li><a href="#" class="hover:text-gray-200">About</a></li>
+            <li><a href="#" class="hover:text-gray-200">Services</a></li>
+            <li><a href="#" class="hover:text-gray-200">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-  <body>
-    <%= yield %>
+      <%= yield %>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+      <div class="container mx-auto text-center">
+        <p>&copy; 2025 Your Company. All rights reserved.</p>
+        <div class="mt-4">
+          <a href="#" class="text-gray-400 hover:text-white mx-2">Privacy Policy</a>
+          <a href="#" class="text-gray-400 hover:text-white mx-2">Terms of Service</a>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
