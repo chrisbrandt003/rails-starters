@@ -1,0 +1,18 @@
+<h1>Sites</h1>
+
+<%= form_with(model: @site, local: true) do |form| %>
+  <%= form.label :files %>
+  <%= form.file_field :files, multiple: true, webkitdirectory: true %>
+  <%= form.submit "Upload Files" %>
+<% end %>
+
+<table>
+<tbody>
+<% @sites.each do |site| %>
+  <tr>
+    <td><%= link_to site.name, site_path(site.name) + '/' %></td>
+    <td><%= link_to 'Delete', site_path(site.name), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
