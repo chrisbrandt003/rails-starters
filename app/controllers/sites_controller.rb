@@ -9,13 +9,18 @@ class SitesController < ApplicationController
   end
 
   def asset
-    puts "#{params[:name]} #{params[:asset]} #{params[:format]}"
     @site = Site.find_by(name: params[:name])
 
     path = "#{params[:asset]}.#{params[:format]}"
     @asset = @site.assets.find_by(path: path)
+    download = nil
 
-    render inline: @asset.file.download
+    download = Rails.cache.fetch("asset/#{@asset.id}") do
+      puts 'CACHING!!!'
+      @asset.file.download
+    end
+
+    render inline: download
   end
 
   def show
@@ -53,6 +58,9 @@ class SitesController < ApplicationController
 
   def destroy
     @site = Site.find_by(name: params[:name])
+    asset_ids = @site.assets.pluck(:id)
+    asset_ids.each {|id| Rails.cache.delete("asset/#{id}") }
+
     @site.destroy
 
     redirect_to action: :index
