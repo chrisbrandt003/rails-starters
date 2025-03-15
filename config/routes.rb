@@ -15,6 +15,13 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :api do
+    resources(:sites, param: :name, only: []) do
+      member do
+        post 'post', to: 'sites#post'
+      end
+    end
+  end
 
   # Defines the root path route ("/")
   root "sites#index"
